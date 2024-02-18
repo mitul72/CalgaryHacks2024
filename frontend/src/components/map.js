@@ -162,19 +162,7 @@ const Map = () => {
     });
   };
 
-  return (
-    <>
-      <button
-        onClick={() =>
-          setNavigationRoute([-122.4194, 37.7749], [-122.399, 37.791])
-        }
-      >
-        Navigate to San Francisco
-      </button>
-
-      <div ref={mapContainer} style={{ width: "100%", height: "100vh" }} />
-    </>
-  );
+  return <div ref={mapContainer} style={{ width: "100%", height: "100vh" }} />;
 };
 
 export default Map;
