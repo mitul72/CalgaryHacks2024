@@ -1,17 +1,13 @@
 "use client";
 
-import MainBar from "@/components/mainbar";
-import MapComp from "@/components/map";
-import { HamburgerButton } from "@/components/shared/hamburger";
+import { CheckboxGroup, Checkbox } from "@nextui-org/react";
 import React from "react";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
 
 export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
@@ -47,14 +43,21 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-black">
-                Modal Title
+                Menu
               </ModalHeader>
               <ModalBody className="text-black">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
+                <CheckboxGroup
+                  label="Filters"
+                  defaultValue={["on-street", "residential"]}
+                >
+                  <Checkbox value="on-street">On-Street Parking</Checkbox>
+                  <Checkbox value="residential">Residential Parking</Checkbox>
+                  <Checkbox value="school">School Parking</Checkbox>
+                </CheckboxGroup>
+
+                <Button color="success" size="md">
+                  Add new listing
+                </Button>
               </ModalBody>
             </>
           )}
