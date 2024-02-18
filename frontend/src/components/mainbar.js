@@ -14,9 +14,13 @@ export default function MainBar() {
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [itemList, setItemList] = useState(res);
+  const [itemList, setItemList] = useState([...res, ...street, ...school]);
 
-  const slicedItemsArray = itemList.slice(0, 30);
+  console.log(itemList);
+
+  const [slicedItemsArray, setSlicedItemsArray] = useState(
+    itemList.slice(0, 30)
+  );
 
   return (
     <>
@@ -38,6 +42,7 @@ export default function MainBar() {
                 .includes(event.target.value.toLowerCase()),
             }));
             setItemList(updatedList);
+            setSlicedItemsArray(updatedList.slice(0, 30));
           }}
           onClear={() => {
             setSearchValue("");
@@ -46,6 +51,7 @@ export default function MainBar() {
               shown: true,
             }));
             setItemList(updatedList);
+            setSlicedItemsArray(updatedList.slice(0, 30));
           }}
           className="mx-3 text-black w-100"
         />
@@ -70,11 +76,15 @@ export default function MainBar() {
                 >
                   <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row text-left">
                     <Image
-                      src={
-                        item.type == "public"
-                          ? "/images/parked-car.png"
-                          : "/images/private-garage.png"
-                      }
+                      src={() => {
+                        if (item.type === "residential") {
+                          return "/images/private-garage.png";
+                        } else if (item.type == "street") {
+                          return "/images/parked-car.png";
+                        } else if (item.type == "school") {
+                          return "/images/school-car.png";
+                        }
+                      }}
                       width={50}
                       height={50}
                       alt="Picture of the author"
