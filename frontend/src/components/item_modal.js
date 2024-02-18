@@ -83,7 +83,7 @@ export const ItemModal = ({
                   className="mt-5 font-base"
                 >
                   <span>
-                    Book this for
+                    Book this for{" "}
                     <span className="font-bold">{price_per_hour}/hour</span>
                   </span>
                 </Button>
