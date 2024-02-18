@@ -78,7 +78,7 @@ router.get("/data", async (req, res) => {
     //var q = query(GARAGE_COLLECTION, where("TimeStartStamp", ">=", Timestamp.fromDate(new Date(TimeMin))));
     //q = query(q, where("TimeStartEnd", "<=", Timestamp.fromDate(new Date(TimeMax))));
     var q;
-    if (Order != undefined && Order != null) q = query(GARAGE_COLLECTION, orderBy(Order, "desc"));
+    if (Order != undefined && Order != null && Order.length() > 0) q = query(GARAGE_COLLECTION, orderBy(Order, "desc"));
     else q = GARAGE_COLLECTION;
 
     const snapshot = await getDocs(q);
