@@ -3,6 +3,7 @@
 import MainBar from "@/components/mainbar";
 import MapComp from "@/components/map";
 import { HamburgerButton } from "@/components/shared/hamburger";
+import { useCoordinates } from "@/context/useCoordinates";
 import React from "react";
 import {
   Modal,
@@ -24,6 +25,7 @@ export const ItemModal = ({
   type,
   description,
 }) => {
+  const { userLocation, getWaypoint } = useCoordinates();
   return (
     <>
       <Modal
@@ -69,10 +71,15 @@ export const ItemModal = ({
                 />
                 {address}
               </ModalHeader>
-              <ModalBody className="text-black mb-5">
+              <ModalBody className="mb-5 text-black">
                 <p>{description}</p>
 
-                <Button color="success" size="lg" className="mt-5 font-base">
+                <Button
+                  onClick={getWaypoint(address)}
+                  color="success"
+                  size="lg"
+                  className="mt-5 font-base"
+                >
                   Book this for {price_per_hour}/hour
                 </Button>
               </ModalBody>

@@ -17,17 +17,13 @@ const Map = () => {
     setStreet,
     mapLoaded,
     setMapLoaded,
+    userLocation,
+    setUserLocation,
+    setNavigationRoute,
+    directions,
+    setDirections,
   } = useCoordinates();
-  const [userLocation, setUserLocation] = useState(null);
   const [mapRef, setMapRef] = useState(null);
-  const [directions, setDirections] = useState(null);
-
-  const setNavigationRoute = (origin, destination) => {
-    if (directions) {
-      directions.setOrigin(origin);
-      directions.setDestination(destination);
-    }
-  };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
