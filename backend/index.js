@@ -6,6 +6,7 @@ const app = express();
 const port = 5000;
 app.use(json());
 app.use("/api", firebaseRouter);
+/*
 import residentialParkingRouter from "./routes/residentialParking.js";
 import schoolParkingRouter from "./routes/schoolParking.js";
 import streetParkingRouter from "./routes/streetParking.js";
@@ -13,7 +14,7 @@ import streetParkingRouter from "./routes/streetParking.js";
 app.use("/residential", residentialParkingRouter);
 app.use("/school", schoolParkingRouter);
 app.use("/street", streetParkingRouter);
-
+*/
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

@@ -5,12 +5,11 @@ import {
   query,
   getDocs,
   collection,
-  limit,
+  addDoc,
   where,
   orderBy,
   Timestamp,
   getFirestore,
-  Query,
 } from "@firebase/firestore";
 
 const firebaseConfig = {
@@ -59,11 +58,8 @@ router.post("/data", async (req, res) => {
   try {
     const { address, type, hourly_price, timings, shown, description } = req.body;
 
-    const TimeStartStamp = Timestamp.fromDate(new Date(TimeStart));
-    const TimeEndStamp = Timestamp.fromDate(new Date(TimeEnd));
-
     // Insert data into Firestore
-    const docRef = await GARAGE_COLLECTION.add({ address, type, hourly_price, timings, shown, description });
+    const docRef = await addDoc(GARAGE_COLLECTION, { address, type, hourly_price, timings, shown, description });
 
     res
       .status(201)
