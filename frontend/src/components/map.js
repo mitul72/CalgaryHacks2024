@@ -90,7 +90,7 @@ const Map = () => {
             type: "Feature",
             geometry: {
               type: "Point",
-              coordinates: coord,
+              coordinates: coord.coords,
             },
           })),
         };

@@ -22,11 +22,11 @@ function parseCSV(filePath) {
       });
   });
 }
-const extractCoordinates = (multilinestring) => {
+const extractCoordinates = (multilinestring, address) => {
   const regex = /\(([^)]+)\)/g;
   const coordinates = [];
   let match;
-  while ((match = regex.exec(multilinestring, address)) !== null) {
+  while ((match = regex.exec(multilinestring)) !== null) {
     match[1].split(",").forEach((coord) => {
       const [lng, lat] = coord.trim().split(" ");
       const parsedLng = parseFloat(lng);
@@ -44,7 +44,7 @@ let coords = null;
 router.use((req, res, next) => {
   if (jsonData === null) {
     console.log("Parsing CSV as cache is empty...");
-    const filePath = "./data/residential.csv"; // Update this path to your CSV file's location
+    const filePath = "./data/school.csv"; // Update this path to your CSV file's location
     parseCSV(filePath)
       .then((data) => {
         jsonData = data;
@@ -70,9 +70,9 @@ router.use((req, res, next) => {
 });
 
 // GET endpoint to provide CSV data as JSON
-router.get("/residential", (req, res) => {
-  res.json(jsonData);
-});
+// router.get("/residential", (req, res) => {
+//   res.json(jsonData);
+// });
 
 router.get("/coords", (req, res) => {
   console.log(coords);
