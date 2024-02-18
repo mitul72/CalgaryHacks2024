@@ -3,154 +3,18 @@ import { useState } from "react";
 import { Card, CardBody, Image, Input, useDisclosure } from "@nextui-org/react";
 
 import { ItemModal } from "./item_modal";
+import { useCoordinates } from "@/context/useCoordinates";
 
 export default function MainBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { res, street, school } = useCoordinates();
   const [currentAddress, setCurrentAddress] = useState("");
   const [currentPrice, setCurrentPrice] = useState("");
   const [currentType, setCurrentType] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
-
   const [searchValue, setSearchValue] = useState("");
-  const [itemList, setItemList] = useState([
-    {
-      address: "69 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "public",
-      hourly_price: "$5.50",
-      timings: "12 - 1 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-  ]);
+  const [itemList, setItemList] = useState(res);
 
   return (
     <>
@@ -181,7 +45,7 @@ export default function MainBar() {
             }));
             setItemList(updatedList);
           }}
-          className="mx-3 w-100 text-black"
+          className="mx-3 text-black w-100"
         />
 
         <div className="h-[calc(100vh-41em)]">
