@@ -77,7 +77,9 @@ export const ItemModal = ({
                 <p>{description}</p>
 
                 <Button
-                  onClick={getWaypoint(address)}
+                  onPress={() => {
+                    getWaypoint(address);
+                  }}
                   color="success"
                   size="lg"
                   className="mt-5 font-base"
