@@ -25,6 +25,7 @@ export const ItemModal = ({
   type,
   description,
   timings,
+  coords,
 }) => {
   const { userLocation, getWaypoint } = useCoordinates();
 
@@ -84,8 +85,8 @@ export const ItemModal = ({
 
                 <Button
                   onPress={() => {
-                    // console.log(address);
-                    getWaypoint(address);
+                    console.log(coords);
+                    let coordinates = getWaypoint(coords);
                   }}
                   color="success"
                   size="lg"

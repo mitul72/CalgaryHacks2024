@@ -9,6 +9,7 @@ export default function MainBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { res, street, school } = useCoordinates();
   const [currentAddress, setCurrentAddress] = useState("");
+  const [currentCoordinates, setCurrentCoordinates] = useState([]);
   const [currentPrice, setCurrentPrice] = useState("");
   const [currentType, setCurrentType] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
@@ -74,6 +75,7 @@ export default function MainBar() {
                   isPressable
                   onPress={() => {
                     setCurrentAddress(item.address);
+                    setCurrentCoordinates(item.coords);
                     setCurrentPrice(item.hourly_price);
                     setCurrentType(item.type);
                     setCurrentDescription(item.description);
@@ -106,6 +108,7 @@ export default function MainBar() {
         </div>
       </div>
       <ItemModal
+        coords={currentCoordinates}
         address={currentAddress}
         price_per_hour={currentPrice}
         type={currentType}

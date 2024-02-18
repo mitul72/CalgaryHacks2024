@@ -3,8 +3,8 @@ import { createContext, useState, useContext, useEffect } from "react";
 const MapContext = createContext();
 
 export const MapProvider = ({ children }) => {
-  const getWaypoint = (address) => {
-    setNavigationRoute(userLocation, address);
+  const getWaypoint = (coordinates) => {
+    setNavigationRoute(userLocation, coordinates);
   };
 
   const setNavigationRoute = (origin, destination) => {
