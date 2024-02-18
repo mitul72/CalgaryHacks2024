@@ -5,7 +5,6 @@ import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
-import { user } from "@nextui-org/react";
 
 const Map = () => {
   const mapContainer = useRef(null);
@@ -165,11 +164,6 @@ const Map = () => {
 
       setMapRef(map);
     });
-  };
-  const navigateToCoordinate = (longitude, latitude) => {
-    if (mapRef) {
-      mapRef.flyTo({ center: [longitude, latitude], zoom: 14 });
-    }
   };
 
   return (

@@ -22,19 +22,18 @@ function parseCSV(filePath) {
       });
   });
 }
-const extractCoordinates = (multilinestring) => {
+const extractCoordinates = (multilinestring, address) => {
   const regex = /\(([^)]+)\)/g;
   const coordinates = [];
   let match;
-  while ((match = regex.exec(multilinestring, address)) !== null) {
-    match[1].split(",").forEach((coord) => {
-      const [lng, lat] = coord.trim().split(" ");
-      const parsedLng = parseFloat(lng);
-      const parsedLat = parseFloat(lat);
-      if (!isNaN(parsedLng) && !isNaN(parsedLat)) {
-        coordinates.push({ coords: [parsedLng, parsedLat], address: address });
-      }
-    });
+  while ((match = regex.exec(multilinestring)) !== null) {
+    let coord = match[1].split(",")[1];
+    const [lng, lat] = coord.trim().split(" ");
+    const parsedLng = parseFloat(lng);
+    const parsedLat = parseFloat(lat);
+    if (!isNaN(parsedLng) && !isNaN(parsedLat)) {
+      coordinates.push({ coords: [parsedLng, parsedLat], address: address });
+    }
   }
   return coordinates;
 };
@@ -52,8 +51,9 @@ router.use((req, res, next) => {
         coords = [];
         data.forEach((item) => {
           const lineString = item.line; // Extract the MULTILINESTRING value
-          const itemCoords = extractCoordinates(lineString, item.address);
-          console.log(itemCoords); // Use or log the extracted coordinates
+          const address = item.ADDRESS_DESC;
+          const itemCoords = extractCoordinates(lineString, address);
+          //   console.log(itemCoords); // Use or log the extracted coordinates
           // Append extracted coordinates for this item to the overall coords array
           coords.push(...itemCoords);
         });
@@ -75,7 +75,7 @@ router.get("/residential", (req, res) => {
 });
 
 router.get("/coords", (req, res) => {
-  console.log(coords);
+  //   console.log(coords);
   res.json(coords);
 });
 
