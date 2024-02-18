@@ -1,6 +1,7 @@
 const express = require('express');
 const Firebase = require("firebase/app");
 const admin = require('firebase-admin');
+const Firestore = require('@firebase/firestore');
 
 
 const firebaseConfig = {
@@ -60,23 +61,13 @@ router.post('/data', async (req, res) => {
 });
 
 
-async function getAllDataFromCollection(collectionName = COLLECTION_NAME) {
-  try {
-    const snapshot = await GARAGE_COLLECTION.get();
-    const data = [];
-    snapshot.forEach(doc => {
-      data.push({ id: doc.id, ...doc.data() });
-    });
-    return data;
-  } catch (error) {
-    console.error('Error getting documents from collection:', error);
-    throw error;
-  }
-}
-
 router.get('/data', async (req, res)=>{
   try {
-    const snapshot = await GARAGE_COLLECTION.get();
+    const {Order, TimeMin, TimeMax} = req.body;
+    const q = Firestore.query(GARAGE_COLLECTION, Firestore.where("TimeStartStamp", ">=", Firestore.Timestamp.fromDate(new Date(TimeMin))),
+     Firestore.orderBy(Order, 'desc'));
+
+    const snapshot = await q.get();
     const data = [];
     snapshot.forEach(doc => {
       data.push({ id: doc.id, ...doc.data() });
