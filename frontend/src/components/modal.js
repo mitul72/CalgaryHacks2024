@@ -67,10 +67,7 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
                   />
                 </CheckboxGroup>
 
-                <div className="flex flex-col gap-3 mt-5">
-                  <h1 className="font-light text-base capitalize">
-                    Add a new listing
-                  </h1>
+                <CheckboxGroup label="Add a new listing" className="mt-5">
                   <Input
                     label="Address"
                     placeholder="Enter your address"
@@ -100,7 +97,7 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
                   <Button color="success" size="md" className="mt-5">
                     Add new listing
                   </Button>
-                </div>
+                </CheckboxGroup>
               </ModalBody>
             </>
           )}
