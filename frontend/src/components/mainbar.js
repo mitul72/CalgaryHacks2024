@@ -154,7 +154,7 @@ export default function MainBar() {
 
   return (
     <>
-      <div className="top-[35em] h-[calc(100vh - 35em)] w-screen absolute backdrop-blur-3xl p-4">
+      <div className="z-40 top-[35em] h-[calc(100vh - 35em)] w-screen absolute backdrop-blur-3xl p-4">
         <Input
           isClearable
           type="location"
