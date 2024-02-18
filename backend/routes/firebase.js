@@ -56,10 +56,10 @@ const GARAGE_COLLECTION = collection(db, "garages");
 // POST request handler for inserting data into Firestore
 router.post("/data", async (req, res) => {
   try {
-    const { address, type, hourly_price, timings, shown, description } = req.body;
+    const { coords, address, type, hourly_price, timings, shown, description } = req.body;
 
     // Insert data into Firestore
-    const docRef = await addDoc(GARAGE_COLLECTION, { address, type, hourly_price, timings, shown, description });
+    const docRef = await addDoc(GARAGE_COLLECTION, { coords, address, type, hourly_price, timings, shown, description });
 
     res
       .status(201)
