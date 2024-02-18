@@ -23,6 +23,7 @@ export const ItemModal = ({
   price_per_hour,
   type,
   description,
+  timings,
 }) => {
   return (
     <>
@@ -68,12 +69,16 @@ export const ItemModal = ({
                   className="rounded-none"
                 />
                 {address}
+                <span className="font-light">{timings}</span>
               </ModalHeader>
               <ModalBody className="text-black mb-5">
                 <p>{description}</p>
 
                 <Button color="success" size="lg" className="mt-5 font-base">
-                  Book this for {price_per_hour}/hour
+                  <span>
+                    Book this for{" "}
+                    <span className="font-bold">{price_per_hour}/hour</span>
+                  </span>
                 </Button>
               </ModalBody>
             </>
