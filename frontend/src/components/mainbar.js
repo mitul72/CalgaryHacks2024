@@ -3,154 +3,22 @@ import { useState } from "react";
 import { Card, CardBody, Image, Input, useDisclosure } from "@nextui-org/react";
 
 import { ItemModal } from "./item_modal";
+import { useCoordinates } from "@/context/useCoordinates";
 
 export default function MainBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { res, street, school } = useCoordinates();
   const [currentAddress, setCurrentAddress] = useState("");
   const [currentPrice, setCurrentPrice] = useState("");
   const [currentType, setCurrentType] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
-
   const [searchValue, setSearchValue] = useState("");
-  const [itemList, setItemList] = useState([
-    {
-      address: "69 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "public",
-      hourly_price: "$5.50",
-      timings: "12 - 1 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-    {
-      address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
-      type: "private",
-      hourly_price: "$5.50",
-      timings: "3-4 PM",
-      shown: true,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
-    },
-  ]);
+  const [itemList, setItemList] = useState(school);
+
+  const [slicedItemsArray, setSlicedItemsArray] = useState(
+    itemList.slice(0, 30)
+  );
 
   return (
     <>
@@ -172,6 +40,7 @@ export default function MainBar() {
                 .includes(event.target.value.toLowerCase()),
             }));
             setItemList(updatedList);
+            setSlicedItemsArray(updatedList.slice(0, 30));
           }}
           onClear={() => {
             setSearchValue("");
@@ -180,13 +49,23 @@ export default function MainBar() {
               shown: true,
             }));
             setItemList(updatedList);
+            setSlicedItemsArray(updatedList.slice(0, 30));
           }}
-          className="mx-3 w-100 text-black"
+          className="mx-3 text-black w-100"
         />
 
         <div className="h-[calc(100vh-41em)]">
           <div className="overflow-y-scroll gap-2 grid m-3 max-h-[calc(100vh-42em)]">
-            {itemList.map((item, index) => {
+            {slicedItemsArray.map((item, index) => {
+              let iconType = "";
+              if (item.type == "residential") {
+                iconType = "/images/private-garage.png";
+              } else if (item.type == "street") {
+                iconType = "/images/parked-car.png";
+              } else if (item.type == "school") {
+                iconType = "/images/school-parking.png";
+              }
+
               return item.shown ? (
                 <Card
                   shadow="sm"
@@ -202,13 +81,9 @@ export default function MainBar() {
                   }}
                   classNames="m-10"
                 >
-                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row">
+                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row text-right">
                     <Image
-                      src={
-                        item.type == "public"
-                          ? "/images/parked-car.png"
-                          : "/images/private-garage.png"
-                      }
+                      src={iconType}
                       width={50}
                       height={50}
                       alt="Picture of the author"

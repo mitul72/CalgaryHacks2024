@@ -33,7 +33,15 @@ const extractCoordinates = (multilinestring, address) => {
     const parsedLng = parseFloat(lng);
     const parsedLat = parseFloat(lat);
     if (!isNaN(parsedLng) && !isNaN(parsedLat)) {
-      coordinates.push({ coords: [parsedLng, parsedLat], address: address });
+      coordinates.push({
+        coords: [parsedLng, parsedLat],
+        address: address,
+        type: "school",
+        hourly_price: "$5.50",
+        timings: "12 - 1 PM",
+        shown: true,
+        description: "public parking",
+      });
     }
   }
   return coordinates;
