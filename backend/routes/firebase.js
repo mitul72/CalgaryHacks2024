@@ -48,22 +48,13 @@ const GARAGE_COLLECTION = collection(db, 'garages');
 // POST request handler for inserting data into Firestore
 router.post('/data', async (req, res) => {
   try {
-    const { Name, Location, ImagePath, Description, TimeStart, TimeEnd, Price } = req.body;
+    const { address, type, hourly_price, timings, shown, description } = req.body;
 
     const TimeStartStamp = Timestamp.fromDate(new Date(TimeStart));
     const TimeEndStamp = Timestamp.fromDate(new Date(TimeEnd));
 
     // Insert data into Firestore
-    const docRef = await GARAGE_COLLECTION.add({
-      Name,
-      Location,
-      ImagePath,
-      Description,
-      TimeStartStamp,
-      TimeEndStamp,
-      Price,
-      createdAt: firestore.FieldValue.serverTimestamp()
-    });
+    const docRef = await GARAGE_COLLECTION.add({ address, type, hourly_price, timings, shown, description });
 
     res.status(201).json({ message: 'Data inserted successfully', id: docRef.id });
   } catch (error) {
@@ -89,13 +80,7 @@ router.get('/data', async (req, res)=>{
     });
     var message = "Data retrieved successfully." + '\n';
     data.forEach(element => {
-      message += "Name: " + element.Name + '\n';
-      message += "Location: " + element.Location + '\n';
-      message += "Image: " + element.ImagePath + '\n';
-      message += "Description: " + element.Description + '\n';
-      message += "Time Start: " + element.TimeStartStamp.toDate() + '\n';
-      message += "Time End: " + element.TimeEndStamp.toDate() + '\n';
-      message += "Hourly Rate: " + element.Price + '\n' + '\n';
+      message += JSON.stringify(element);
     });
     res.status(201).json({ message: message });
     return data;
