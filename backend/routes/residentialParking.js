@@ -36,7 +36,7 @@ const extractCoordinates = (multilinestring, address) => {
       coordinates.push({
         coords: [parsedLng, parsedLat],
         address: address,
-        type: "private",
+        type: "residential",
         hourly_price: "$5.50",
         timings: "12 - 1 PM",
         shown: true,
