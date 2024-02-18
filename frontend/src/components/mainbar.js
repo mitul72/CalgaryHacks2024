@@ -14,11 +14,12 @@ export default function MainBar() {
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [itemList, setItemList] = useState(school);
 
-  const [slicedItemsArray, setSlicedItemsArray] = useState(
-    itemList.slice(0, 30)
-  );
+  const [slicedItemsArray, setSlicedItemsArray] = useState([
+    ...res.slice(0, 10),
+    ...street.slice(0, 10),
+    ...school.slice(0, 10),
+  ]);
 
   return (
     <>
@@ -33,22 +34,20 @@ export default function MainBar() {
           defaultValue=""
           onChange={(event) => {
             setSearchValue(event.target.value);
-            const updatedList = itemList.map((item) => ({
+            const updatedList = slicedItemsArray.map((item) => ({
               ...item,
               shown: item.address
                 .toLowerCase()
                 .includes(event.target.value.toLowerCase()),
             }));
-            setItemList(updatedList);
             setSlicedItemsArray(updatedList.slice(0, 30));
           }}
           onClear={() => {
             setSearchValue("");
-            const updatedList = itemList.map((item) => ({
+            const updatedList = slicedItemsArray.map((item) => ({
               ...item,
               shown: true,
             }));
-            setItemList(updatedList);
             setSlicedItemsArray(updatedList.slice(0, 30));
           }}
           className="mx-3 text-black w-100"
