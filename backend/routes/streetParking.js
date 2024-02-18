@@ -2,10 +2,11 @@
 import express from "express";
 import fs from "fs";
 import csv from "csv-parser";
-import router from express.Router();
+import { Router } from "express";
 
 // Cached data
 let jsonData = null;
+let router = Router();
 
 // Function to read and parse the CSV file into JSON
 function parseCSV(filePath) {
@@ -79,4 +80,4 @@ router.get("/coords", (req, res) => {
   res.json(coords);
 });
 
-module.exports = router;
+export default router;
