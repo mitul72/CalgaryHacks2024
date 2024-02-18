@@ -1,8 +1,7 @@
 const express = require('express');
-const FirebaseApp = require("firebase/app");
+const Firebase = require("firebase/app");
 const admin = require('firebase-admin');
 
-const COLLECTION_NAME = 'garages';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDMwW8qljlf8d56lZ9eeCf3ynvNzcPbSS8",
@@ -15,7 +14,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const FirebaseInstance = FirebaseApp.initializeApp(firebaseConfig);
+const FirebaseInstance = Firebase.initializeApp(firebaseConfig);
+
 
 
 const serviceAccount = require('./parkmycar-b9d36-firebase-adminsdk-eozx8-87b1367b27.json');
@@ -29,19 +29,26 @@ admin.initializeApp({
 const router = express.Router();
 const db = admin.firestore();
 
+const GARAGE_COLLECTION = db.collection('garages');
+
+
 // POST request handler for inserting data into Firestore
 router.post('/data', async (req, res) => {
   try {
-    const { field1, field2, field3 } = req.body;
+    const { Name, Location, ImagePath, Description, TimeStart, TimeEnd, Price } = req.body;
 
-
-    // Perform data validation if needed
+    const TimeStartStamp = admin.firestore.Timestamp.fromDate(new Date(TimeStart));
+    const TimeEndStamp = admin.firestore.Timestamp.fromDate(new Date(TimeEnd));
 
     // Insert data into Firestore
-    const docRef = await db.collection(COLLECTION_NAME).add({
-      field1,
-      field2,
-      field3,
+    const docRef = await GARAGE_COLLECTION.add({
+      Name,
+      Location,
+      ImagePath,
+      Description,
+      TimeStartStamp,
+      TimeEndStamp,
+      Price,
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
 
@@ -55,7 +62,7 @@ router.post('/data', async (req, res) => {
 
 async function getAllDataFromCollection(collectionName = COLLECTION_NAME) {
   try {
-    const snapshot = await db.collection(collectionName).get();
+    const snapshot = await GARAGE_COLLECTION.get();
     const data = [];
     snapshot.forEach(doc => {
       data.push({ id: doc.id, ...doc.data() });
@@ -69,9 +76,22 @@ async function getAllDataFromCollection(collectionName = COLLECTION_NAME) {
 
 router.get('/data', async (req, res)=>{
   try {
-    const collectionName = 'garages'; // Replace with your collection name
-    const data = await getAllDataFromCollection(collectionName);
-    res.status(201).json({ message: 'Data successfully retrieved.'});
+    const snapshot = await GARAGE_COLLECTION.get();
+    const data = [];
+    snapshot.forEach(doc => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+    var message = "Data retrieved successfully." + '\n';
+    data.forEach(element => {
+      message += "Name: " + element.Name + '\n';
+      message += "Location: " + element.Location + '\n';
+      message += "Image: " + element.ImagePath + '\n';
+      message += "Description: " + element.Description + '\n';
+      message += "Time Start: " + element.TimeStartStamp.toDate() + '\n';
+      message += "Time End: " + element.TimeEndStamp.toDate() + '\n';
+      message += "Hourly Rate: " + element.Price + '\n' + '\n';
+    });
+    res.status(201).json({ message: message });
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
