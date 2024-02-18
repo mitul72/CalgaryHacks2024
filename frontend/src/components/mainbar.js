@@ -14,9 +14,7 @@ export default function MainBar() {
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [itemList, setItemList] = useState([...res, ...street, ...school]);
-
-  console.log(itemList);
+  const [itemList, setItemList] = useState(school);
 
   const [slicedItemsArray, setSlicedItemsArray] = useState(
     itemList.slice(0, 30)
@@ -59,6 +57,15 @@ export default function MainBar() {
         <div className="h-[calc(100vh-41em)]">
           <div className="overflow-y-scroll gap-2 grid m-3 max-h-[calc(100vh-42em)]">
             {slicedItemsArray.map((item, index) => {
+              let iconType = "";
+              if (item.type == "residential") {
+                iconType = "/images/private-garage.png";
+              } else if (item.type == "street") {
+                iconType = "/images/parked-car.png";
+              } else if (item.type == "school") {
+                iconType = "/images/school-parking.png";
+              }
+
               return item.shown ? (
                 <Card
                   shadow="sm"
@@ -74,17 +81,9 @@ export default function MainBar() {
                   }}
                   classNames="m-10"
                 >
-                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row text-left">
+                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row text-right">
                     <Image
-                      src={() => {
-                        if (item.type === "residential") {
-                          return "/images/private-garage.png";
-                        } else if (item.type == "street") {
-                          return "/images/parked-car.png";
-                        } else if (item.type == "school") {
-                          return "/images/school-car.png";
-                        }
-                      }}
+                      src={iconType}
                       width={50}
                       height={50}
                       alt="Picture of the author"
