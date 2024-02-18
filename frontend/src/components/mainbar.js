@@ -16,6 +16,8 @@ export default function MainBar() {
   const [searchValue, setSearchValue] = useState("");
   const [itemList, setItemList] = useState(res);
 
+  const slicedItemsArray = itemList.slice(0, 30);
+
   return (
     <>
       <div className="z-40 top-[35em] h-[calc(100vh - 35em)] w-screen absolute backdrop-blur-3xl p-4">
@@ -50,7 +52,7 @@ export default function MainBar() {
 
         <div className="h-[calc(100vh-41em)]">
           <div className="overflow-y-scroll gap-2 grid m-3 max-h-[calc(100vh-42em)]">
-            {itemList.map((item, index) => {
+            {slicedItemsArray.map((item, index) => {
               return item.shown ? (
                 <Card
                   shadow="sm"
@@ -66,7 +68,7 @@ export default function MainBar() {
                   }}
                   classNames="m-10"
                 >
-                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row">
+                  <CardBody className="p-6 text-small justify-between text-black text-wrap max-w-[50em] flex-row text-left">
                     <Image
                       src={
                         item.type == "public"
