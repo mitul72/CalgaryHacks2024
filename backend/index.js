@@ -1,12 +1,12 @@
-const apiRoutes = require('./routes/firebase');
-const bodyParser = require('body-parser');
+import { firebaseRouter } from './routes/firebase.js';
+import { json } from 'express';
+import express from 'express';
 
 
-const express = require("express");
 const app = express();
 const port = 5000;
-app.use(bodyParser.json());
-app.use('/api', apiRoutes);
+app.use(json());
+app.use('/api', firebaseRouter);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
