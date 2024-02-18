@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { useCoordinates } from "@/context/useCoordinates";
 import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -8,10 +9,16 @@ import { user } from "@nextui-org/react";
 
 const Map = () => {
   const mapContainer = useRef(null);
-  const [res, setRes] = useState([]);
-  const [school, setSchool] = useState([]);
-  const [street, setStreet] = useState([]);
-  const [mapLoaded, setMapLoaded] = useState(false);
+  const {
+    res,
+    setRes,
+    school,
+    setSchool,
+    street,
+    setStreet,
+    mapLoaded,
+    setMapLoaded,
+  } = useCoordinates();
   const [userLocation, setUserLocation] = useState(null);
   const [mapRef, setMapRef] = useState(null);
   const [directions, setDirections] = useState(null);
@@ -24,23 +31,6 @@ const Map = () => {
   };
 
   useEffect(() => {
-    const fetchResCoords = async () => {
-      const response = await fetch("/api/residential/coords");
-      const jsonData = await response.json();
-      setRes(jsonData);
-    };
-
-    const fetchSchoolCoords = async () => {
-      const response = await fetch("/api/school/coords");
-      const jsonData = await response.json();
-      setSchool(jsonData);
-    };
-
-    const fetchStreetsCoords = async () => {
-      const response = await fetch("/api/street/coords");
-      const jsonData = await response.json();
-      setStreet(jsonData);
-    };
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation([position.coords.longitude, position.coords.latitude]);
@@ -50,14 +40,6 @@ const Map = () => {
         setUserLocation([0, 0]); // Fallback to a default location
       }
     );
-
-    Promise.all([
-      fetchResCoords(),
-      fetchSchoolCoords(),
-      fetchStreetsCoords(),
-    ]).then(() => {
-      setMapLoaded(true);
-    });
   }, []);
   useEffect(() => {
     if (mapLoaded && userLocation) {
