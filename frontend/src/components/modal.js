@@ -8,6 +8,9 @@ import {
   ModalHeader,
   ModalBody,
   Button,
+  Input,
+  Slider,
+  Link,
 } from "@nextui-org/react";
 
 export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
@@ -42,7 +45,7 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-black">
+              <ModalHeader className="flex flex-col gap-1 text-black text-3xl">
                 Menu
               </ModalHeader>
               <ModalBody className="text-black">
@@ -53,11 +56,51 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
                   <Checkbox value="on-street">On-Street Parking</Checkbox>
                   <Checkbox value="residential">Residential Parking</Checkbox>
                   <Checkbox value="school">School Parking</Checkbox>
+
+                  <Slider
+                    label="Price Range (Hourly)"
+                    step={1}
+                    maxValue={1000}
+                    minValue={0}
+                    defaultValue={0.4}
+                    className="max-w-md mt-5"
+                  />
                 </CheckboxGroup>
 
-                <Button color="success" size="md">
-                  Add new listing
-                </Button>
+                <div className="flex flex-col gap-3 mt-5">
+                  <h1 className="font-light text-base capitalize">
+                    Add a new listing
+                  </h1>
+                  <Input
+                    label="Address"
+                    placeholder="Enter your address"
+                    type="text"
+                    variant="underlined"
+                  />
+                  <Input
+                    label="Description"
+                    placeholder="Enter your description"
+                    type="text"
+                    variant="underlined"
+                  />
+                  <Input
+                    label="Availability"
+                    placeholder="Enter your Availability"
+                    type="text"
+                    variant="underlined"
+                  />
+
+                  <Input
+                    label="Price"
+                    placeholder="Enter the Hourly Rental Price (in CAD)"
+                    type="text"
+                    variant="underlined"
+                  />
+
+                  <Button color="success" size="md" className="mt-5">
+                    Add new listing
+                  </Button>
+                </div>
               </ModalBody>
             </>
           )}
