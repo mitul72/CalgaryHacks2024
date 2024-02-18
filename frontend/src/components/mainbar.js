@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 
 import { Card, CardBody, Image, Input, useDisclosure } from "@nextui-org/react";
 
@@ -14,12 +14,14 @@ export default function MainBar() {
   const [currentDescription, setCurrentDescription] = useState("");
   const [currentTimings, setCurrentTimings] = useState("");
   const [searchValue, setSearchValue] = useState("");
-
-  const [slicedItemsArray, setSlicedItemsArray] = useState([
-    ...res.slice(0, 10),
-    ...street.slice(0, 10),
-    ...school.slice(0, 10),
-  ]);
+  const [slicedItemsArray, setSlicedItemsArray] = useState([]);
+  useLayoutEffect(() => {
+    setSlicedItemsArray([
+      ...res.slice(0, 10),
+      ...street.slice(0, 10),
+      ...school.slice(0, 10),
+    ]);
+  }, [res, street, school]);
 
   return (
     <>

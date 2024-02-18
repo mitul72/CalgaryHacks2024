@@ -78,6 +78,7 @@ export const ItemModal = ({
 
                 <Button
                   onPress={() => {
+                    // console.log(address);
                     getWaypoint(address);
                   }}
                   color="success"
