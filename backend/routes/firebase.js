@@ -77,7 +77,9 @@ router.get("/data", async (req, res) => {
     //Can only query ranges of the same property.
     //var q = query(GARAGE_COLLECTION, where("TimeStartStamp", ">=", Timestamp.fromDate(new Date(TimeMin))));
     //q = query(q, where("TimeStartEnd", "<=", Timestamp.fromDate(new Date(TimeMax))));
-    var q = query(GARAGE_COLLECTION, orderBy(Order, "desc"));
+    var q;
+    if (Order != undefined && Order != null) q = query(GARAGE_COLLECTION, orderBy(Order, "desc"));
+    else q = GARAGE_COLLECTION;
 
     const snapshot = await getDocs(q);
     const data = [];
