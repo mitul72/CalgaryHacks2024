@@ -27,6 +27,16 @@ export const ItemModal = ({
   timings,
 }) => {
   const { userLocation, getWaypoint } = useCoordinates();
+
+  let iconType = "";
+  if (type == "residential") {
+    iconType = "/images/private-garage.png";
+  } else if (type == "street") {
+    iconType = "/images/parked-car.png";
+  } else if (type == "school") {
+    iconType = "/images/school-parking.png";
+  }
+
   return (
     <>
       <Modal
@@ -60,11 +70,7 @@ export const ItemModal = ({
             <>
               <ModalHeader className="flex flex-row gap-5 mt-5 text-black">
                 <Image
-                  src={
-                    type == "public"
-                      ? "/images/parked-car.png"
-                      : "/images/private-garage.png"
-                  }
+                  src={iconType}
                   width={50}
                   height={50}
                   alt="Picture of the author"

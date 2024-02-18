@@ -94,7 +94,14 @@ export const HamburgerModal = ({ isOpen, onOpen, onClose }) => {
                     variant="underlined"
                   />
 
-                  <Button color="success" size="md" className="mt-5">
+                  <Button
+                    color="success"
+                    size="md"
+                    className="mt-5"
+                    onPress={() => {
+                      onClose();
+                    }}
+                  >
                     Add new listing
                   </Button>
                 </CheckboxGroup>
