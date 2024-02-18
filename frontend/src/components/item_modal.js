@@ -13,8 +13,17 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import Image from "next/image";
 
-export const ItemModal = ({ isOpen, onOpen, onClose }) => {
+export const ItemModal = ({
+  isOpen,
+  onOpen,
+  onClose,
+  address,
+  price_per_hour,
+  type,
+  description,
+}) => {
   return (
     <>
       <Modal
@@ -46,15 +55,26 @@ export const ItemModal = ({ isOpen, onOpen, onClose }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-black">
-                Modal Title
+              <ModalHeader className="flex flex-row gap-5 mt-5 text-black">
+                <Image
+                  src={
+                    type == "public"
+                      ? "/images/parked-car.png"
+                      : "/images/private-garage.png"
+                  }
+                  width={50}
+                  height={50}
+                  alt="Picture of the author"
+                  className="rounded-none"
+                />
+                {address}
               </ModalHeader>
-              <ModalBody className="text-black">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
+              <ModalBody className="text-black mb-5">
+                <p>{description}</p>
+
+                <Button color="success" size="lg" className="mt-5 font-base">
+                  Book this for {price_per_hour}/hour
+                </Button>
               </ModalBody>
             </>
           )}

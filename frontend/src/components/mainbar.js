@@ -7,6 +7,11 @@ import { ItemModal } from "./item_modal";
 export default function MainBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [currentAddress, setCurrentAddress] = useState("");
+  const [currentPrice, setCurrentPrice] = useState("");
+  const [currentType, setCurrentType] = useState("");
+  const [currentDescription, setCurrentDescription] = useState("");
+
   const [searchValue, setSearchValue] = useState("");
   const [itemList, setItemList] = useState([
     {
@@ -14,90 +19,120 @@ export default function MainBar() {
       type: "public",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
     {
       address: "96 Cock Dick Fuckery, Calgary, AB; G4Y S3X",
       type: "private",
       hourly_price: "$5.50",
       shown: true,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.",
     },
   ]);
 
@@ -134,6 +169,10 @@ export default function MainBar() {
                 key={index}
                 isPressable
                 onPress={() => {
+                  setCurrentAddress(item.address);
+                  setCurrentPrice(item.hourly_price);
+                  setCurrentType(item.type);
+                  setCurrentDescription(item.description);
                   onOpen();
                 }}
                 classNames="m-10"
@@ -162,7 +201,15 @@ export default function MainBar() {
           })}
         </div>
       </div>
-      <ItemModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <ItemModal
+        address={currentAddress}
+        price_per_hour={currentPrice}
+        type={currentType}
+        description={currentDescription}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      />
     </>
   );
 }
